@@ -1,5 +1,6 @@
 dojo.require("esri.map");
 dojo.require("esri.arcgis.utils");
+dojo.require("dijit.dijit");
 
 var _maps = [];
 
