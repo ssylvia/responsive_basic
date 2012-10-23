@@ -1,12 +1,12 @@
 var _configOptions
 
 var init = (function(){
-	
+
   _configOptions = {
-	
+
 	//The IDs for the webmap from ArcGIS Online
 	webmaps : [{
-	  "id" : "6edc7488ccbd4f42b7af33f48e0264a1",
+	  "id" : "6c83595e3a364aaa9a26efbec4947a96",
 	  "title" : ""
 	}],
 	//Enter a title, if no title is specified, the first webmap's title is used.
@@ -19,11 +19,11 @@ var init = (function(){
     bingmapskey : "",
 	//specify a proxy url if needed
     proxyurl:"",
-    //specify the url to a geometry service 
+    //specify the url to a geometry service
     geometryserviceurl:"http://tasks.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer",
     //Modify this to point to your sharing service URL if you are using the portal
-    sharingurl :"http://arcgis.com/sharing/content/items"	
-	
+    sharingurl :"http://arcgis.com/sharing/content/items"
+
   }
-	
+
 }());

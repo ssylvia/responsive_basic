@@ -14,7 +14,41 @@ p{font-family:Georgia, "Times New Roman", Times, serif;}
 #banner{
   background-color:#444;
   color:#fff;
-  padding:25px;
+  padding:20px 25px 15px 25px;
+}
+
+#banner.wide{
+  padding:20px 25px 15px 25px;
+}
+
+#banner.small{
+  padding:12px;
+}
+
+#title{
+  font-weight:bold;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  -o-text-overflow:ellipsis;
+}
+
+#title.wide{
+  font-size:22px;
+  margin:none;
+}
+
+#title.small{
+  font-size:16px;
+  text-align:center;
+}
+
+#subtitle.wide{
+  margin-top:5px;
+}
+
+#subtitle.small{
+  display:none;
 }
 
 .map{
@@ -22,11 +56,3 @@ p{font-family:Georgia, "Times New Roman", Times, serif;}
   width:100%;
 }
 
-#title{
-  font-size:22px;
-  font-weight:bold;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  -o-text-overflow:ellipsis;
-}

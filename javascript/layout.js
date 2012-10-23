@@ -3,7 +3,7 @@ $(document).ready(function(e) {
 });
 
 $(window).resize(function(e) {
-    resetLayout();
+  resetLayout();
 });
 
 var setUpBanner = function(){
@@ -14,20 +14,34 @@ var setUpBanner = function(){
 };
 
 var resetLayout = function(){
-	var dWidth = $(document).width();
-	if (dWidth < 768){
-	  $("#subtitle").hide();
+	var wWidth = $(window).width();
+    var wHeight = $(window).height();
+	if (wWidth < 768){
+      $("#banner").removeClass("wide");
+      $("#title").removeClass("wide");
+      $("#banner").addClass("small");
+      $("#title").addClass("small");
+      if($("#subtitle").length > 0){
+        $("#subtitle").removeClass("wide");
+	    $("#subtitle").addClass("small");
+      }
 	}
 	else{
 	  if($("#subtitle").length === 0){
 		$("#banner").append("<div id='subtitle'>"+_configOptions.subtitle+"</div>");
 	  }
-	  $("#subtitle").show();
+      $("#banner").removeClass("small");
+      $("#title").removeClass("small");
+      $("#subtitle").removeClass("small");
+      $("#banner").addClass("wide");
+	  $("#title").addClass("wide");
+      $("#subtitle").addClass("wide");
 	}
-	
+    $("#mapPane").height(wHeight - $("#banner").outerHeight());
+
 	if (_maps.length > 0){
 	  $.each(_maps,function(i){
-		  _maps[i].resize();
+		_maps[i].resize();
 	  });
 	}
 };
