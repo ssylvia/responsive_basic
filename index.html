@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Storytelling Responsive</title>
   <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/dojo/dijit/themes/tundra/tundra.css">
   <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/esri/css/esri.css" />
@@ -22,13 +22,28 @@
   <script type="text/javascript" src="javascript/layout.js"></script>
 </head>
 
-<body class="tundra">
-  <div id="banner">
-    <h1 id="title"></h1>
-  </div><!--/banner-->
-  <div id="mapPane">
-  </div><!--/mapPane-->
-  <div id="infoBar">
-  </div><!--/infoBar-->
+<body class="tundra" onorientationchange="resetLayout();">
+  <div id="mainWindow" dojotype="dijit.layout.BorderContainer" design="headline" gutters="false">
+    <div id="banner" dojotype="dijit.layout.BorderContainer" region="top">
+      <h1 id="title"></h1>
+    </div><!--/banner-->
+    <div id="content" dojotype="dijit.layout.BorderContainer" gutters="false" region="center">
+      <div id="sidePanel" dojotype="dijit.layout.BorderContainer" gutters="false" region="left">
+        <div id="topPaneSide" dojotype="dijit.layout.BorderContainer" gutters="false" region="center">
+          <div id="descriptionPaneSide" dojotype="dijit.layout.ContentPane" region="center">
+          </div><!--/descriptionPaneSide-->
+          <div id="legendHeader" dojotype="dijit.layout.ContentPane" region="bottom">
+            LEGEND
+          </div><!--/legendHeader-->
+        </div><!--/topPaneSide-->
+        <div id="legendPaneSide" dojotype="dijit.layout.ContentPane" region="bottom">
+        </div><!--/legendPaneSide-->
+      </div><!--/sidePanel-->
+      <div id="mapPane" dojotype="dijit.layout.ContentPane" region="center">
+      </div><!--/mapPane-->
+    </div><!--/content-->
+    <div id="infoBar" dojotype="dijit.layout.ContentPane" region="bottom">
+    </div><!--/infoBar-->
+  </div><!--mainWindow-->
 </body>
 </html>

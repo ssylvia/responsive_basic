@@ -1,6 +1,8 @@
 dojo.require("esri.map");
 dojo.require("esri.arcgis.utils");
 dojo.require("dijit.dijit");
+dojo.require("dijit.layout.BorderContainer");
+dojo.require("dijit.layout.ContentPane");
 
 var _maps = [];
 
@@ -28,6 +30,13 @@ var createMaps = function(){
 	  }
 
       var map = response.map;
+
+      map.itemData = {
+        "title" : response.itemInfo.item.title,
+        "subtitle" : response.itemInfo.item.snippet,
+        "description" : response.itemInfo.item.description
+      };
+
 	  _maps.push(map);
 
       //add the legend

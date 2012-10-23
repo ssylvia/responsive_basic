@@ -7,22 +7,28 @@ ul,ol {list-style:none;}
 fieldset,img,hr {border:none;}
 caption,th {text-align:left;}
 table {border-collapse:collapse; border-spacing:0;}
-td {vertical-align:top;}
+td {vertical-align:middle;}
 h1,h2,h3,h4,h5,h6{font-family:Arial, Helvetica, sans-serif;}
 p{font-family:Georgia, "Times New Roman", Times, serif;}
 
+#mainWindow{
+  position:absolute;
+  top:0px;
+  height:100%;
+  width:100%;
+}
 #banner{
   background-color:#444;
   color:#fff;
-  padding:20px 25px 15px 25px;
+  width:100%;
 }
 
 #banner.wide{
-  padding:20px 25px 15px 25px;
+  height:115px;
 }
 
 #banner.small{
-  padding:12px;
+  height:44px;
 }
 
 #title{
@@ -35,16 +41,18 @@ p{font-family:Georgia, "Times New Roman", Times, serif;}
 
 #title.wide{
   font-size:22px;
-  margin:none;
+  margin:20px 25px 0 20px;
 }
 
 #title.small{
   font-size:16px;
   text-align:center;
+  margin-top:12px;
 }
 
 #subtitle.wide{
-  margin-top:5px;
+  margin:5px 25px 0 20px;
+
 }
 
 #subtitle.small{
@@ -56,3 +64,87 @@ p{font-family:Georgia, "Times New Roman", Times, serif;}
   width:100%;
 }
 
+#sidePanel{
+  background-color:#fff;
+  color:#444;
+  height:100%;
+  width:0;
+}
+
+#legendHeader{
+  background-color:#444;
+  color:#fff;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:12px;
+  height:21px;
+  width:100%;
+  padding:5px 20px 0 20px;
+}
+
+#legendPaneSide{
+  height:46%;
+  width:100%;
+}
+
+#sidePanel.wide{
+  display:block;
+  width:22%;
+  min-width:275px;
+}
+
+#sidePanel.small{
+  display:none;
+}
+
+#infoBar{
+  background-color:#444;
+  color:#dadada;
+  width:100%;
+
+}
+
+#infoBar.wide{
+  display:none;
+  padding:5px 0 5px 0;
+}
+
+#infoBar.small{
+  display:block;
+  height:36px;
+  padding:5px 0 5px 0;
+}
+
+#iconBar{
+  width:100%;
+}
+
+.iconCell{
+  text-align:center;
+  cursor:pointer;
+}
+
+.icon.wide{
+  display:none;
+}
+
+.icon.small{
+  display:table-cell;
+}
+
+.iconText{
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+.iconText.narrow{
+  display:none;
+}
+
+.iconText.small{
+  display:inline;
+  vertical-align:top;
+  line-height:2.1;
+}
+
+.iconText.wide{
+  display:none;
+}
