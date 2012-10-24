@@ -8,8 +8,8 @@ fieldset,img,hr {border:none;}
 caption,th {text-align:left;}
 table {border-collapse:collapse; border-spacing:0;}
 td {vertical-align:middle;}
-h1,h2,h3,h4,h5,h6{font-family:Arial, Helvetica, sans-serif;}
-p{font-family:Georgia, "Times New Roman", Times, serif;}
+h1,h3,h4,h5,h6{font-family:Arial, Helvetica, sans-serif;}
+h2,p{font-family:Georgia, "Times New Roman", Times, serif;}
 
 #mainWindow{
   position:absolute;
@@ -60,6 +60,8 @@ p{font-family:Georgia, "Times New Roman", Times, serif;}
 }
 
 .map{
+  position:absolute;
+  top:0;
   height:100%;
   width:100%;
 }
@@ -69,6 +71,17 @@ p{font-family:Georgia, "Times New Roman", Times, serif;}
   color:#444;
   height:100%;
   width:0;
+}
+
+#mobileContent{
+  background-color:#fff;
+  color#444;
+  position:absolute;
+  bottom:0;
+  height:0%;
+  width:100%;
+  z-index:100;
+  overflow:auto;
 }
 
 #legendHeader{
@@ -94,6 +107,10 @@ p{font-family:Georgia, "Times New Roman", Times, serif;}
 
 #sidePanel.small{
   display:none;
+}
+
+#mapPane{
+  overflow:hidden;
 }
 
 #infoBar{
@@ -147,4 +164,19 @@ p{font-family:Georgia, "Times New Roman", Times, serif;}
 
 .iconText.wide{
   display:none;
+}
+
+.legend{
+  display:none;
+  padding:25px;
+}
+
+.mapTitle{
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.description{
+  display:none;
+  padding:25px;
 }

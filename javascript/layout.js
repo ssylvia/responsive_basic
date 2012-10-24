@@ -1,7 +1,45 @@
-var _dojoReady;
+var _dojoReady,
+_currentMap = 0;
 
 $(document).ready(function(e) {
   resetLayout();
+
+  $(".iconCell").click(function(e){
+    var jElement = $(this);
+
+    if (jElement.hasClass("descriptionButton")){
+      updateMobileContent("description");
+    }
+    else if (jElement.hasClass("legendButton")){
+      updateMobileContent("legend");
+    }
+    else{
+      updateMobileContent("share");
+    }
+
+    if($(this).hasClass("close")){
+      $("#mobileContent").animate({
+        "height" : "0%"
+      },"fast");
+      setTimeout(function() {
+        $(".iconCell").addClass("open");
+        $(".iconCell").removeClass("close");
+        jElement.addClass("open");
+        jElement.removeClass("close");
+      }, 200);
+    }
+    if($(this).hasClass("open")){
+      $("#mobileContent").animate({
+        "height" : "100%"
+      },"fast");
+      setTimeout(function() {
+        $(".iconCell").removeClass("close");
+        $(".iconCell").addClass("open");
+        jElement.addClass("close");
+        jElement.removeClass("open");
+      }, 200);
+    }
+  });
 });
 
 $(window).resize(function(e) {
@@ -17,24 +55,29 @@ var setUpBanner = function(){
 
 var resetLayout = function(){
 	var wWidth = $(window).width();
+
 	if (wWidth < 768){
       $("#banner").removeClass("wide").addClass("small");
       $("#title").removeClass("wide").addClass("small");;
       if($("#subtitle").length > 0){
         $("#subtitle").removeClass("wide").addClass("small");
       }
-      if($("#iconBar").length === 0){
-        $("#infoBar").append("<table id='iconBar'><tr><td class='iconCell'><img src='css/icons/4_collections_view_as_list.png' class='icon' alt=''><p class='iconText small'>Description</p></td><td class='iconCell'><img src='css/icons/10_device_access_storage.png' class='icon' alt=''><p class='iconText small'>Legend</p></td><td class='iconCell'><img src='css/icons/6_social_share.png' class='icon' alt=''><p class='iconText small'>Share</p></td><tr></table>");
-      }
-      else{
-        $(".iconText").removeClass("wide").removeClass("narrow").addClass("small");
-      }
+      $(".iconText").removeClass("wide").removeClass("narrow").addClass("small");
       $("#infoBar").removeClass("wide").addClass("small");
       $("#sidePanel").removeClass("wide").addClass("small");
+      $(".currentDescriptionPane").removeClass("currentDescriptionPane");
+      $("#mobileContent").addClass("currentDescriptionPane");
+      $(".currentLegendPane").removeClass("currentLegendPane");
+      $("#mobileContent").addClass("currentLegendPane");
 	}
 	else{
+
+      $("#mobileContent").height(0);
+      $(".iconCell").removeClass("close");
+      $(".iconCell").addClass("open");
+
 	  if($("#subtitle").length === 0){
-		$("#banner").append("<div id='subtitle'>"+_configOptions.subtitle+"</div>");
+		$("#banner").append("<h2 id='subtitle'>"+_configOptions.subtitle+"</h2>");
 	  }
       $("#banner").removeClass("small");
       $("#title").removeClass("small");
@@ -45,7 +88,24 @@ var resetLayout = function(){
       $(".iconText").removeClass("small").removeClass("narrow").addClass("wide");
       $("#infoBar").removeClass("small").addClass("wide");
       $("#sidePanel").removeClass("small").addClass("wide");
+      $(".currentDescriptionPane").removeClass("currentDescriptionPane");
+      $("#descriptionPaneSide").addClass("currentDescriptionPane");
+      $(".currentLegendPane").removeClass("currentLegendPane");
+      $("#legendPaneSide").addClass("currentLegendPane");
+      $(".legend").hide();
+      $(".description").hide();
+      $("#legend"+_currentMap).show();
+      $("#description"+_currentMap).show();
 	}
+
+    $(".map").each(function(){
+        $(this).css("left",($(this).index() - 1 - _currentMap)*$("#mapPane").width());
+    });
+
+    if (_maps[_currentMap]){
+      $("#description"+_currentMap).appendTo($(".currentDescriptionPane"));
+      $("#legend"+_currentMap).appendTo($(".currentLegendPane"));
+    }
 
     if (wWidth < 350){
       $(".iconText").removeClass("wide").removeClass("small").addClass("narrow");
@@ -60,6 +120,52 @@ var resetLayout = function(){
 		_maps[i].resize();
 	  });
 	}
+};
+
+var updateMobileContent = function(pane){
+    if (pane === "description"){
+      $(".legend").hide();
+      $(".description").hide();
+      $("#description"+_currentMap).show();
+    }
+    else if (pane === "legend"){
+      $(".legend").hide();
+      $(".description").hide();
+      $("#legend"+_currentMap).show();
+    }
+    else{
+      $(".legend").hide();
+      $(".description").hide();
+    }
+};
+
+var nextMap = function(){
+  if (_currentMap === _configOptions.webmaps.length - 1){
+    goToMap(0);
+  }
+  else{
+    goToMap(_currentMap+1)
+  }
+};
+
+var prevMap = function(){
+  if (_currentMap === 0){
+    goToMap(_configOptions.webmaps.length - 1);
+  }
+  else{
+    goToMap(_currentMap-1)
+  }
+};
+
+var goToMap = function(pos){
+    _currentMap = pos;
+    $(".map").each(function(){
+      $(this).animate({
+        "left" : ($(this).index() - 1 - _currentMap)*$("#mapPane").width()
+      },500)
+    });
+
+    resetLayout();
 };
 
 dojo.ready(function(){

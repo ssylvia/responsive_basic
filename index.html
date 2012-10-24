@@ -26,6 +26,8 @@
   <div id="mainWindow" dojotype="dijit.layout.BorderContainer" design="headline" gutters="false">
     <div id="banner" dojotype="dijit.layout.BorderContainer" region="top">
       <h1 id="title"></h1>
+        <button style="position:absolute;z-index:99;bottom:5px; right:35px" onclick="prevMap()">&lt;</button>
+        <button style="position:absolute;z-index:99;bottom:5px; right:5px" onclick="nextMap()">&gt;</button>
     </div><!--/banner-->
     <div id="content" dojotype="dijit.layout.BorderContainer" gutters="false" region="center">
       <div id="sidePanel" dojotype="dijit.layout.BorderContainer" gutters="false" region="left">
@@ -40,9 +42,11 @@
         </div><!--/legendPaneSide-->
       </div><!--/sidePanel-->
       <div id="mapPane" dojotype="dijit.layout.ContentPane" region="center">
+        <div id="mobileContent"></div>
       </div><!--/mapPane-->
     </div><!--/content-->
     <div id="infoBar" dojotype="dijit.layout.ContentPane" region="bottom">
+      <table id="iconBar"><tr><td class="iconCell descriptionButton open"><img src="css/icons/4_collections_view_as_list.png" class="icon" alt="Description"><p class="iconText small">Description</p></td><td class="iconCell legendButton open"><img src="css/icons/10_device_access_storage.png" class="icon" alt="Legend"><p class="iconText small">Legend</p></td><td class="iconCell shareButton open"><img src="css/icons/6_social_share.png" class="icon" alt="Share"><p class="iconText small">Share</p></td><tr></table>
     </div><!--/infoBar-->
   </div><!--mainWindow-->
 </body>
