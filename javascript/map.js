@@ -31,6 +31,7 @@ var createMaps = function(){
 
       var map = response.map;
 
+      map.firstUpdate = false;
       map.itemData = {
         "title" : response.itemInfo.item.title,
         "subtitle" : response.itemInfo.item.snippet,
@@ -38,6 +39,12 @@ var createMaps = function(){
       };
 
 	  _maps.push(map);
+
+      dojo.connect(map,"onUpdateEnd",function(){
+        if(map.firstUpdate === false){
+          mapLoaded();
+        }
+      });
 
       //add the legend
       var layers = response.itemInfo.itemData.operationalLayers;
@@ -57,6 +64,13 @@ var createMaps = function(){
 
   });
 
+};
+
+var mapLoaded = function(){
+  if(_maps.length === 1){
+  }
+  else{
+  }
 };
 
 dojo.addOnLoad(initAGOL);
