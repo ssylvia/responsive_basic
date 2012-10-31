@@ -70,11 +70,11 @@ var createMaps = function(){
         resetLayout();
       }
       else{
-      dojo.connect(map,"onLoad",function(){
-        initMap(map,layers,i);
-        resetLayout();
-      });
-    }
+        dojo.connect(map,"onLoad",function(){
+          initMap(map,layers,i);
+          resetLayout();
+        });
+      }
     },function(error){
       console.log("Map creation failed: ", dojo.toJson(error));
     });

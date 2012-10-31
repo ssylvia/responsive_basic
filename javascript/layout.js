@@ -158,14 +158,16 @@ var prevMap = function(){
 };
 
 var goToMap = function(pos){
+  if(_configOptions.webmaps.length > 1){
     _currentMap = pos;
     $(".map").each(function(){
       $(this).animate({
         "left" : ($(this).index() - 1 - _currentMap)*$("#mapPane").width()
-      },500)
+      },500);
     });
-
-    resetLayout();
+  }
+  
+  resetLayout();
 };
 
 dojo.ready(function(){
