@@ -14,71 +14,71 @@ var initAGOL = function(){
 };
 
 var createMaps = function(){
-  dojo.forEach(_configOptions.webmaps,function(webmap,i){
-	dojo.place("<div id='map"+i+"' class='map'></div>",dojo.byId('mapPane'),"last");
-    dojo.place("<div id='description"+i+"' class='description'></div>",dojo.byId('mainWindow'),"last");
-    dojo.place("<div id='legend"+i+"' class='legend'></div>",dojo.byId('mainWindow'),"last");
+  var i = _currentMap;
+  var webmap = _configOptions.webmaps[i];
+  dojo.place("<div id='map"+i+"' class='map'></div>",dojo.byId('mapPane'),i);
+  dojo.place("<div id='description"+i+"' class='description'></div>",dojo.byId('mainWindow'),"last");
+  dojo.place("<div id='legend"+i+"' class='legend'></div>",dojo.byId('mainWindow'),"last");
 
-    var mapDeferred = esri.arcgis.utils.createMap(webmap.id, "map"+i, {
-	  mapOptions: {
-        slider: true,
-        nav:false
+  var mapDeferred = esri.arcgis.utils.createMap(webmap.id, "map"+i, {
+    mapOptions: {
+      slider: true,
+      nav:false
+    }
+  });
+  mapDeferred.then(function(response) {
+
+    var map = response.map;
+
+    if(i === 0){
+      map.currentMap = true;
+      _configOptions.title = _configOptions.title || response.itemInfo.item.title;
+      _configOptions.subtitle = _configOptions.subtitle || response.itemInfo.item.snippet;
+	  _configOptions.description = _configOptions.description || response.itemInfo.item.description;
+
+	  setUpBanner();
+	}
+    else{
+      map.currentMap = false;
+    }
+
+    if(_configOptions.webmaps.length === 1){
+      dojo.byId("description"+i).innerHTML = _configOptions.description;
+    }
+    else{
+      dojo.byId("description"+i).innerHTML = "<h3 class='mapTitle'>"+response.itemInfo.item.title+"</h3>"+response.itemInfo.item.description;
+    }
+
+    map.firstUpdate = false;
+    map.itemData = {
+      "title" : response.itemInfo.item.title,
+      "subtitle" : response.itemInfo.item.snippet,
+      "description" : response.itemInfo.item.description
+    };
+
+	_maps[i] = map;
+
+    dojo.connect(map,"onUpdateEnd",function(){
+      if(map.firstUpdate === false){
+        mapLoaded();
       }
     });
-    mapDeferred.then(function(response) {
 
-      var map = response.map;
+    //add the legend
+    var layers = response.itemInfo.itemData.operationalLayers;
 
-      if(i === 0){
-        map.currentMap = true;
-        _configOptions.title = _configOptions.title || response.itemInfo.item.title;
-        _configOptions.subtitle = _configOptions.subtitle || response.itemInfo.item.snippet;
-		_configOptions.description = _configOptions.description || response.itemInfo.item.description;
-
-		setUpBanner();
-	  }
-      else{
-        map.currentMap = false;
-      }
-
-      if(_configOptions.webmaps.length === 1){
-        dojo.byId("description"+i).innerHTML = _configOptions.description;
-      }
-      else{
-        dojo.byId("description"+i).innerHTML = "<h3 class='mapTitle'>"+response.itemInfo.item.title+"</h3>"+response.itemInfo.item.description;
-      }
-
-      map.firstUpdate = false;
-      map.itemData = {
-        "title" : response.itemInfo.item.title,
-        "subtitle" : response.itemInfo.item.snippet,
-        "description" : response.itemInfo.item.description
-      };
-
-	  _maps.push(map);
-
-      dojo.connect(map,"onUpdateEnd",function(){
-        if(map.firstUpdate === false){
-          mapLoaded();
-        }
-      });
-
-      //add the legend
-      var layers = response.itemInfo.itemData.operationalLayers;
-      if(map.loaded){
+    if(map.loaded){
+      initMap(map,layers,i);
+      resetLayout();
+    }
+    else{
+      dojo.connect(map,"onLoad",function(){
         initMap(map,layers,i);
         resetLayout();
-      }
-      else{
-        dojo.connect(map,"onLoad",function(){
-          initMap(map,layers,i);
-          resetLayout();
-        });
-      }
-    },function(error){
-      console.log("Map creation failed: ", dojo.toJson(error));
-    });
-
+      });
+    }
+  },function(error){
+    console.log("Map creation failed: ", dojo.toJson(error));
   });
 
 };
@@ -92,8 +92,10 @@ var mapLoaded = function(){
   else{
     var readyCount = 0;
     dojo.forEach(_maps,function(map){
-      if (map.firstUpdate === true){
-        readyCount++;
+      if (map !== undefined){
+        if (map.firstUpdate === true){
+          readyCount++;
+        }
       }
     });
     if (readyCount === _configOptions.webmaps.length){
@@ -157,7 +159,7 @@ function buildLayersList(layers){
         var hideLayers = dojo.map(dojo.filter(mapLayer.layers, function(lyr){
         return (lyr.showLegend === false);
     }), function(lyr){
-      return lyr.id
+      return lyr.id;
       });
       if (hideLayers.length) {
         layerInfo.hideLayers = hideLayers;

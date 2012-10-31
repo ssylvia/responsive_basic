@@ -58,7 +58,7 @@ var resetLayout = function(){
 
 	if (wWidth < 768){
       $("#banner").removeClass("wide").addClass("small");
-      $("#title").removeClass("wide").addClass("small");;
+      $("#title").removeClass("wide").addClass("small");
       if($("#subtitle").length > 0){
         $("#subtitle").removeClass("wide").addClass("small");
       }
@@ -98,9 +98,11 @@ var resetLayout = function(){
       $("#description"+_currentMap).show();
 	}
 
-    $(".map").each(function(){
-        $(this).css("left",($(this).index() - 1 - _currentMap)*$("#mapPane").width());
-    });
+    if (_maps[_currentMap] !== undefined){
+      $(".map").each(function(){
+        $(this).css("left",($(this).index() - $("#"+_maps[_currentMap].container.id).index())*$("#mapPane").width());
+      });
+    }
 
     if (_maps[_currentMap]){
       $("#description"+_currentMap).appendTo($(".currentDescriptionPane"));
@@ -117,7 +119,9 @@ var resetLayout = function(){
 
 	if (_maps.length > 0){
 	  $.each(_maps,function(i){
-		_maps[i].resize();
+        if (_maps[i] !== undefined){
+		  _maps[i].resize();
+        }
 	  });
 	}
 };
@@ -144,7 +148,7 @@ var nextMap = function(){
     goToMap(0);
   }
   else{
-    goToMap(_currentMap+1)
+    goToMap(_currentMap+1);
   }
 };
 
@@ -153,20 +157,25 @@ var prevMap = function(){
     goToMap(_configOptions.webmaps.length - 1);
   }
   else{
-    goToMap(_currentMap-1)
+    goToMap(_currentMap-1);
   }
 };
 
 var goToMap = function(pos){
   if(_configOptions.webmaps.length > 1){
     _currentMap = pos;
-    $(".map").each(function(){
-      $(this).animate({
-        "left" : ($(this).index() - 1 - _currentMap)*$("#mapPane").width()
-      },500);
-    });
+    if (_maps[_currentMap] === undefined){
+      createMaps();
+    }
+    if (_maps[_currentMap] !== undefined){
+      $(".map").each(function(){
+        $(this).animate({
+          "left" : ($(this).index() - $("#"+_maps[_currentMap].container.id).index())*$("#mapPane").width()
+        },500);
+      });
+    }
   }
-  
+
   resetLayout();
 };
 

@@ -1,9 +1,9 @@
-var _configOptions
+var _configOptions;
 
 var init = (function(){
 
   _configOptions = {
-
+      
 	//The IDs for the webmap from ArcGIS Online
 	webmaps : [{
 	  "id" : "e5359a951a5b4b1dacff6f4c79cda9e7",
@@ -30,6 +30,6 @@ var init = (function(){
     //Modify this to point to your sharing service URL if you are using the portal
     sharingurl :"http://arcgis.com/sharing/content/items"
 
-  }
+  };
 
 }());
