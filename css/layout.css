@@ -59,6 +59,15 @@ h2,p{font-family:Georgia, "Times New Roman", Times, serif;}
   display:none;
 }
 
+#loader{
+  display:none;
+  position:absolute;
+  height:60px;
+  width:60px;
+  background:url('images/loader.gif') no-repeat right top;;
+  z-index:1000;
+}
+
 .map{
   position:absolute;
   top:0;
@@ -179,4 +188,8 @@ h2,p{font-family:Georgia, "Times New Roman", Times, serif;}
 .description{
   display:none;
   padding:25px;
+}
+
+.esriPopupMobile .titlePane{
+  background-color:#444;
 }

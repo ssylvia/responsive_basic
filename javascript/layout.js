@@ -56,6 +56,11 @@ var setUpBanner = function(){
 var resetLayout = function(){
 	var wWidth = $(window).width();
 
+    $("#loader").css({
+      "left" : ($("#mapPane").width()/2) - 30,
+      "top" : ($("#mapPane").height()/2) - 30
+    });
+
 	if (wWidth < 768){
       $("#banner").removeClass("wide").addClass("small");
       $("#title").removeClass("wide").addClass("small");
@@ -71,7 +76,7 @@ var resetLayout = function(){
       $("#mobileContent").addClass("currentLegendPane");
 	}
 	else{
-
+      $("#title").html(_configOptions.title);
       $("#mobileContent").height(0);
       $(".iconCell").removeClass("close");
       $(".iconCell").addClass("open");
@@ -166,6 +171,9 @@ var goToMap = function(pos){
     _currentMap = pos;
     if (_maps[_currentMap] === undefined){
       createMaps();
+    }
+    else{
+      $("#loader").fadeOut();
     }
     if (_maps[_currentMap] !== undefined){
       $(".map").each(function(){

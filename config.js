@@ -3,7 +3,7 @@ var _configOptions;
 var init = (function(){
 
   _configOptions = {
-      
+
 	//The IDs for the webmap from ArcGIS Online
 	webmaps : [{
 	  "id" : "e5359a951a5b4b1dacff6f4c79cda9e7",

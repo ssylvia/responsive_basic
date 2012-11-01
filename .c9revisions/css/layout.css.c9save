@@ -601,3 +601,15 @@
 {"ts":1351113782548,"patch":[[{"diffs":[[0,"ane{\r\n  "],[-1,"  "],[1,"over"],[0,"\r\n}\r\n\r\n#"]],"start1":1852,"start2":1852,"length1":18,"length2":20}]],"length":2643,"saved":false}
 {"ts":1351113783129,"patch":[[{"diffs":[[0,"\r\n  over"],[1,"flow"],[0,"\r\n}\r\n\r\n#"]],"start1":1856,"start2":1856,"length1":16,"length2":20}]],"length":2647,"saved":false}
 {"ts":1351113786406,"patch":[[{"diffs":[[0,"overflow"],[1,":hidden;"],[0,"\r\n}\r\n\r\n#"]],"start1":1860,"start2":1860,"length1":16,"length2":24}]],"length":2655,"saved":false}
+{"contributors":[],"silentsave":true,"ts":1351792084804,"patch":[[{"diffs":[[0,"none;\r\n}\r\n\r\n"],[1,"#loader{\r\n  display:none;\r\n  position:absolute;\r\n  height:60px;\r\n  width:60px;\r\n  background:url('images/loader.gif') no-repeat right top;;\r\n  z-index:1000;\r\n}\r\n\r\n"],[0,".map{\r\n  pos"]],"start1":1159,"start2":1159,"length1":24,"length2":187},{"diffs":[[0,"ay:none;\r\n  padding:25px;\r\n}"],[1,"\r\n\r\n.esriPopupMobile .titlePane"]],"start1":2790,"start2":2790,"length1":28,"length2":59}]],"length":2849,"saved":false}
+{"ts":1351792086616,"patch":[[{"diffs":[[0,"e .titlePane"],[1,"{\r\n}"]],"start1":2837,"start2":2837,"length1":12,"length2":16}]],"length":2853,"saved":false}
+{"ts":1351792087556,"patch":[[{"diffs":[[0,"ePane{\r\n"],[1,"\r\n"],[0,"}"]],"start1":2844,"start2":2844,"length1":9,"length2":11}]],"length":2855,"saved":false}
+{"ts":1351792089955,"patch":[[{"diffs":[[0,"ePane{\r\n"],[1,"  backgr"],[0,"\r\n}"]],"start1":2844,"start2":2844,"length1":11,"length2":19}]],"length":2863,"saved":false}
+{"ts":1351792091239,"patch":[[{"diffs":[[0,"  backgr"],[1,"ound"],[0,"\r\n}"]],"start1":2852,"start2":2852,"length1":11,"length2":15}]],"length":2867,"saved":false}
+{"ts":1351792092075,"patch":[[{"diffs":[[0,"ckground"],[1,":"],[0,"\r\n}"]],"start1":2856,"start2":2856,"length1":11,"length2":12}]],"length":2868,"saved":false}
+{"ts":1351792094095,"patch":[[{"diffs":[[0,"kground:"],[1,"color"],[0,"\r\n}"]],"start1":2857,"start2":2857,"length1":11,"length2":16}]],"length":2873,"saved":false}
+{"ts":1351792099004,"patch":[[{"diffs":[[0,"ound"],[-1,":color"],[0,"\r\n}"]],"start1":2860,"start2":2860,"length1":13,"length2":7}]],"length":2867,"saved":false}
+{"ts":1351792100597,"patch":[[{"diffs":[[0,"ckground"],[1,"-color"],[0,"\r\n}"]],"start1":2856,"start2":2856,"length1":11,"length2":17}]],"length":2873,"saved":false}
+{"ts":1351792101358,"patch":[[{"diffs":[[0,"nd-color"],[1,":"],[0,"\r\n}"]],"start1":2862,"start2":2862,"length1":11,"length2":12}]],"length":2874,"saved":false}
+{"ts":1351792103717,"patch":[[{"diffs":[[0,"d-color:"],[1,"#444"],[0,"\r\n}"]],"start1":2863,"start2":2863,"length1":11,"length2":15}]],"length":2878,"saved":false}
+{"ts":1351792107843,"patch":[[{"diffs":[[0,"lor:#444"],[1,";"],[0,"\r\n}"]],"start1":2867,"start2":2867,"length1":11,"length2":12}]],"length":2879,"saved":false}

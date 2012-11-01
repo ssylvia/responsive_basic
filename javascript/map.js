@@ -6,24 +6,29 @@ dojo.require("dijit.layout.BorderContainer");
 dojo.require("dijit.layout.ContentPane");
 dojo.require("esri.dijit.Legend");
 dojo.require("esri.dijit.Scalebar");
+dojo.require("esri.dijit.PopupMobile");
 
-var _maps = [];
+var _maps = [], _popup =[];
 
 var initAGOL = function(){
 	createMaps();
 };
 
 var createMaps = function(){
+  dojo.style(dojo.byId("loader"),"display","block");
   var i = _currentMap;
   var webmap = _configOptions.webmaps[i];
   dojo.place("<div id='map"+i+"' class='map'></div>",dojo.byId('mapPane'),i);
   dojo.place("<div id='description"+i+"' class='description'></div>",dojo.byId('mainWindow'),"last");
   dojo.place("<div id='legend"+i+"' class='legend'></div>",dojo.byId('mainWindow'),"last");
+  
+  _popup[i] = new esri.dijit.PopupMobile(null, dojo.create("div"));
 
   var mapDeferred = esri.arcgis.utils.createMap(webmap.id, "map"+i, {
     mapOptions: {
       slider: true,
-      nav:false
+      nav:false,
+      infoWindow:_popup[i]
     }
   });
   mapDeferred.then(function(response) {
@@ -86,22 +91,7 @@ var createMaps = function(){
 dojo.addOnLoad(initAGOL);
 
 var mapLoaded = function(){
-  if(_maps.length === 1){
-    openApp();
-  }
-  else{
-    var readyCount = 0;
-    dojo.forEach(_maps,function(map){
-      if (map !== undefined){
-        if (map.firstUpdate === true){
-          readyCount++;
-        }
-      }
-    });
-    if (readyCount === _configOptions.webmaps.length){
-      openApp();
-    }
-  }
+  $("#loader").fadeOut();
 };
 
 var initMap = function (map,layers,index) {
